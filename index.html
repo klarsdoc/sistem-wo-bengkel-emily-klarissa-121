@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101812">
+    <title>RodaKerja — Work Order Bengkel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="RodaKerja dashboard">
+          <span class="brand-mark">RK</span>
+          <span class="brand-copy"><strong>roda<span>kerja</span></strong><small>WORKSHOP MANAGER</small></span>
+        </a>
+        <div class="side-label">MENU UTAMA</div>
+        <nav class="main-nav" aria-label="Menu utama">
+          <button class="nav-link active" data-page="dashboard"><span class="nav-icon">⌂</span>Ringkasan</button>
+          <button class="nav-link" data-page="orders"><span class="nav-icon">▤</span>Work order<span class="nav-count" id="nav-order-count">0</span></button>
+          <button class="nav-link" data-page="customers"><span class="nav-icon">♙</span>Pelanggan</button>
+          <button class="nav-link" data-page="vehicles"><span class="nav-icon">◈</span>Kendaraan</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="workshop-card">
+            <div class="workshop-icon">✳</div>
+            <strong>Kerja lebih teratur.</strong>
+            <p>Semua progres servis, tercatat dalam satu tempat.</p>
+            <div class="workshop-dots"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="profile">
+            <div class="avatar">BS</div>
+            <div><strong>Bengkel Sejahtera</strong><small>Workspace admin</small></div>
+            <span class="profile-more">···</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="breadcrumb"><span>Workspace</span><b>/</b><strong id="breadcrumb-current">Ringkasan</strong></div>
+          <div class="topbar-right">
+            <div class="today-label"><span class="live-dot"></span><span id="today-date"></span></div>
+            <button class="icon-button" id="refresh-button" aria-label="Muat ulang data" title="Muat ulang">↻</button>
+            <div class="top-avatar">BS</div>
+          </div>
+        </header>
+
+        <section class="page-view" id="dashboard-page">
+          <div class="welcome-row">
+            <div><div class="eyebrow"><span class="eyebrow-line"></span> DASHBOARD BENGKEL</div><h1>Selamat pagi, <span>tim!</span> <span class="wave">✦</span></h1><p class="page-subtitle">Berikut yang sedang terjadi di bengkelmu hari ini.</p></div>
+            <button class="primary-button" data-action="new-order"><span>＋</span> Buat work order</button>
+          </div>
+          <div class="stats-grid">
+            <article class="stat-card stat-dark"><div class="stat-top"><span>Total work order</span><span class="stat-symbol">▤</span></div><div class="stat-value" id="stat-total">0</div><div class="stat-foot"><span class="stat-dot green"></span> Semua pekerjaan tercatat</div><div class="stat-art"></div></article>
+            <article class="stat-card"><div class="stat-top"><span>Sedang dikerjakan</span><span class="stat-symbol symbol-orange">◷</span></div><div class="stat-value" id="stat-progress">0</div><div class="stat-foot"><span class="stat-dot orange"></span> Butuh perhatian teknisi</div></article>
+            <article class="stat-card"><div class="stat-top"><span>Siap diambil</span><span class="stat-symbol symbol-blue">✓</span></div><div class="stat-value" id="stat-ready">0</div><div class="stat-foot"><span class="stat-dot blue"></span> Menunggu pelanggan</div></article>
+            <article class="stat-card"><div class="stat-top"><span>Pelanggan terdaftar</span><span class="stat-symbol symbol-purple">♙</span></div><div class="stat-value" id="stat-customers">0</div><div class="stat-foot"><span class="stat-dot purple"></span> Terhubung ke bengkelmu</div></article>
+          </div>
+          <div class="content-card">
+            <div class="section-heading"><div><div class="eyebrow">AKTIVITAS TERBARU</div><h2>Work order terbaru</h2></div><button class="text-button" data-go="orders">Lihat semua <span>→</span></button></div>
+            <div class="table-wrap"><table><thead><tr><th>NO. ORDER</th><th>PELANGGAN & KENDARAAN</th><th>KELUHAN</th><th>TANGGAL</th><th>STATUS</th><th></th></tr></thead><tbody id="dashboard-orders"></tbody></table></div>
+            <div class="empty-state hidden" id="dashboard-empty"><span class="empty-icon">✳</span><strong>Belum ada work order</strong><p>Buat work order pertamamu untuk mulai mencatat servis.</p><button class="primary-button small" data-action="new-order">＋ Buat work order</button></div>
+          </div>
+          <div class="dashboard-bottom">
+            <div class="content-card mini-card"><div class="section-heading"><div><div class="eyebrow">DATA MASTER</div><h2>Data bengkel</h2></div></div><div class="quick-links"><button data-go="customers"><span class="quick-icon customer-icon">♙</span><span><strong>Pelanggan</strong><small><b id="quick-customer-count">0</b> pelanggan terdaftar</small></span><i>→</i></button><button data-go="vehicles"><span class="quick-icon vehicle-icon">◈</span><span><strong>Kendaraan</strong><small><b id="quick-vehicle-count">0</b> kendaraan terdaftar</small></span><i>→</i></button></div></div>
+            <div class="tip-card"><div class="tip-decoration">✳</div><div class="eyebrow">TIPS HARI INI</div><h3>Komunikasi yang jelas,<br>pelanggan yang puas.</h3><p>Catat keluhan pelanggan sedetail mungkin agar teknisi tahu persis apa yang perlu diperiksa.</p></div>
+          </div>
+        </section>
+
+        <section class="page-view hidden" id="orders-page">
+          <div class="welcome-row page-title-row"><div><div class="eyebrow"><span class="eyebrow-line"></span> OPERASIONAL</div><h1>Work <span>order.</span></h1><p class="page-subtitle">Pantau setiap pekerjaan servis dari masuk sampai selesai.</p></div><button class="primary-button" data-action="new-order"><span>＋</span> Buat work order</button></div>
+          <div class="content-card listing-card">
+            <div class="list-toolbar"><div><h2>Semua work order <span class="result-count" id="order-result-count">0</span></h2><p>Kelola pekerjaan servis bengkelmu.</p></div><div class="toolbar-controls"><label class="search-box"><span>⌕</span><input id="order-search" type="search" placeholder="Cari order, pelanggan..."></label><select class="filter-select" id="order-filter" aria-label="Filter status"><option value="">Semua status</option><option>Menunggu</option><option>Dalam proses</option><option>Siap diambil</option><option>Selesai</option><option>Dibatalkan</option></select></div></div>
+            <div class="table-wrap"><table><thead><tr><th>NO. ORDER</th><th>PELANGGAN & KENDARAAN</th><th>KELUHAN</th><th>TANGGAL</th><th>STATUS</th><th>BIAYA ESTIMASI</th><th></th></tr></thead><tbody id="orders-table"></tbody></table></div>
+            <div class="empty-state hidden" id="orders-empty"><span class="empty-icon">▤</span><strong id="orders-empty-title">Belum ada work order</strong><p id="orders-empty-copy">Buat order baru untuk mencatat pekerjaan servis.</p><button class="primary-button small" data-action="new-order">＋ Buat work order</button></div>
+          </div>
+        </section>
+
+        <section class="page-view hidden" id="customers-page">
+          <div class="welcome-row page-title-row"><div><div class="eyebrow"><span class="eyebrow-line"></span> DATA MASTER</div><h1>Data <span>pelanggan.</span></h1><p class="page-subtitle">Simpan informasi pelanggan agar mudah dihubungi kembali.</p></div><button class="primary-button" data-action="new-customer"><span>＋</span> Tambah pelanggan</button></div>
+          <div class="content-card listing-card"><div class="list-toolbar"><div><h2>Semua pelanggan <span class="result-count" id="customer-result-count">0</span></h2><p>Informasi pelanggan yang terdaftar di bengkel.</p></div><div class="toolbar-controls"><label class="search-box"><span>⌕</span><input id="customer-search" type="search" placeholder="Cari nama, telepon..."></label></div></div><div class="table-wrap"><table><thead><tr><th>NAMA PELANGGAN</th><th>NO. TELEPON</th><th>EMAIL</th><th>ALAMAT</th><th>TERDAFTAR</th><th></th></tr></thead><tbody id="customers-table"></tbody></table></div><div class="empty-state hidden" id="customers-empty"><span class="empty-icon">♙</span><strong>Belum ada pelanggan</strong><p>Tambahkan pelanggan untuk mulai membuat work order.</p><button class="primary-button small" data-action="new-customer">＋ Tambah pelanggan</button></div></div>
+        </section>
+
+        <section class="page-view hidden" id="vehicles-page">
+          <div class="welcome-row page-title-row"><div><div class="eyebrow"><span class="eyebrow-line"></span> DATA MASTER</div><h1>Data <span>kendaraan.</span></h1><p class="page-subtitle">Kelola kendaraan pelanggan yang pernah servis.</p></div><button class="primary-button" data-action="new-vehicle"><span>＋</span> Tambah kendaraan</button></div>
+          <div class="content-card listing-card"><div class="list-toolbar"><div><h2>Semua kendaraan <span class="result-count" id="vehicle-result-count">0</span></h2><p>Terhubung dengan data pelanggan bengkel.</p></div><div class="toolbar-controls"><label class="search-box"><span>⌕</span><input id="vehicle-search" type="search" placeholder="Cari plat, kendaraan..."></label></div></div><div class="table-wrap"><table><thead><tr><th>KENDARAAN</th><th>NO. POLISI</th><th>PEMILIK</th><th>TAHUN</th><th>WARNA</th><th></th></tr></thead><tbody id="vehicles-table"></tbody></table></div><div class="empty-state hidden" id="vehicles-empty"><span class="empty-icon">◈</span><strong>Belum ada kendaraan</strong><p>Tambahkan kendaraan yang terhubung ke pelanggan.</p><button class="primary-button small" data-action="new-vehicle">＋ Tambah kendaraan</button></div></div>
+        </section>
+
+        <footer class="page-footer"><span>RODAKERJA WORKSHOP MANAGER</span><span>Dibuat untuk kerja yang lebih rapi <b>✳</b></span></footer>
+      </main>
+    </div>
+    <div class="toast-region" id="toast-region" aria-live="polite"></div>
+    <dialog class="form-dialog" id="form-dialog"><form id="entity-form" novalidate><div class="dialog-header"><div><div class="eyebrow" id="form-eyebrow">DATA BENGKEL</div><h2 id="form-title">Tambah data</h2></div><button type="button" class="dialog-close" id="dialog-close" aria-label="Tutup">×</button></div><div class="dialog-body" id="form-fields"></div><div class="dialog-footer"><button type="button" class="secondary-button" id="dialog-cancel">Batal</button><button type="submit" class="primary-button" id="form-submit">Simpan data <span>→</span></button></div></form></dialog>
+    <dialog class="confirm-dialog" id="confirm-dialog"><div class="confirm-content"><div class="confirm-icon">!</div><div class="eyebrow">KONFIRMASI</div><h2>Hapus data ini?</h2><p id="confirm-copy">Data yang dihapus tidak dapat dikembalikan.</p><div class="confirm-actions"><button class="secondary-button" id="confirm-cancel">Batal</button><button class="danger-button" id="confirm-delete">Ya, hapus</button></div></div></dialog>
+  </body>
+</html>
